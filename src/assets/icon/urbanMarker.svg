@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1757954189556" class="icon" viewBox="0 0 1024 1024" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" p-id="1591" width="14" height="14"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <radialGradient id="gHighlightNE" gradientUnits="userSpaceOnUse"
+                    cx="692" cy="332" r="260">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurNE" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="30"/>
+    </filter>
+  </defs>
+  <circle cx="512" cy="512" r="448" fill="#008000"/>
+  <circle cx="692" cy="332" r="260" fill="url(#gHighlightNE)" filter="url(#blurNE)"/>
+  <circle cx="672" cy="312" r="100" fill="#ffffff" opacity="0.9"/>
+</svg>

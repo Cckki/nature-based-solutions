@@ -9,7 +9,9 @@ import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/nature-based-solutions/',
+  base: process.env.NODE_ENV === 'production'
+    ? '/nature-based-solutions/' // GH Pages repo
+    : '/',
   plugins: [
     vue(),
     //    vueDevTools(),

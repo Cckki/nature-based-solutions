@@ -82,7 +82,7 @@ const legendData = [
 /**
  * @param map -> map-instance to be added
  */
-const addLegendTo = (map: Map) => {
+export const initLegend = (map: Map) => {
     // @ts-ignore
     const legend = L.control({ position: "bottomright" })
     legend.onAdd = () => {
@@ -152,8 +152,6 @@ export const initMap = (
     /************ set default central view ***********/
     if (bounds) mapInstance.fitBounds(bounds)
     else mapInstance.fitBounds(Regions.USA)
-
-    addLegendTo(mapInstance)
 
     return { map: mapInstance, markerCluster }
 }

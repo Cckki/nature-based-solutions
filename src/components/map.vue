@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { initMap, lazyLoadMarkers } from "@/config/map.factory"
+import { initMap, lazyLoadMarkers, initLegend } from "@/config/map.factory"
 import { Regions } from "@/config/map.config"
 import { ref, onMounted } from "vue"
 import { useAppStore } from "@/stores/appStore"
@@ -15,14 +15,15 @@ const caseInfo = ref({
   }
 })
 
-onMounted(async() => {
+onMounted(async () => {
   const { map, markerCluster } = initMap("map", Regions.USA)
-  const spots1 = await parseCsvToJson('/data/domestic.csv')
-  const spots2 = await parseCsvToJson('/data/overseas.csv')
-  
+  const { legend } = initLegend(map)
+  const spots1 = await parseCsvToJson(import.meta.env.BASE_URL + 'data/domestic.csv')
+  const spots2 = await parseCsvToJson(import.meta.env.BASE_URL + 'data/overseas.csv')
   lazyLoadMarkers(map, coordinateFilter([...spots1, ...spots2]), null, (location) => {
-    caseInfo.value.data = location
-    caseInfo.value.visible = true
+    // caseInfo.value.data = location
+    // caseInfo.value.visible = true
+    if (location.Source && location.Source != '') window.open(location.Source, '_blank')
   })
 })
 </script>

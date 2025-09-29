@@ -7,11 +7,19 @@ import { coordinateFilter } from "@/utils/filter"
 import { parseCsvToJson } from "@/utils/csv.parser"
 
 const appStore = useAppStore()
+const openTab = (url: string) => {
+  if (url && url.replace(/\s+/g, "") != '') window.open(url, '_blank')
+}
+
 const caseInfo = ref({
   visible: false,
   data: {
-    name:'',
-    imgURL:'',
+    name: '',
+    Description: '',
+    AssetType:'',
+    imgURL: '',
+    Source: '',
+    Location:''
   }
 })
 
@@ -21,9 +29,8 @@ onMounted(async () => {
   const spots1 = await parseCsvToJson(import.meta.env.BASE_URL + 'data/domestic.csv')
   const spots2 = await parseCsvToJson(import.meta.env.BASE_URL + 'data/overseas.csv')
   lazyLoadMarkers(map, coordinateFilter([...spots1, ...spots2]), null, (location) => {
-    // caseInfo.value.data = location
-    // caseInfo.value.visible = true
-    if (location.Source && location.Source != '') window.open(location.Source, '_blank')
+    caseInfo.value.data = location
+    caseInfo.value.visible = true
   })
 })
 </script>
@@ -33,10 +40,21 @@ onMounted(async () => {
     <a-modal v-model:open="caseInfo.visible" centered width="80%" :title="caseInfo.data.name"
       @ok="caseInfo.visible = false">
       <div class="map-case-wrapper">
-        <img v-if="caseInfo.data.imgURL" :src="caseInfo.data.imgURL" class="map-case-img" />
-        <div>
-          {{ caseInfo.data }}
-        </div>
+        <a-form :label-col="{ span: 5 }" :wrapper-col="{ span: 15 }">
+          <a-form-item label="snapshot"  v-if="caseInfo.data.imgURL" >
+            <img :src="caseInfo.data.imgURL" class="map-case-img" />
+          </a-form-item>
+          <a-form-item label="brief-intro">
+            <div class="map-project-intro">
+              {{ caseInfo.data.Location }}<br />
+              {{ caseInfo.data.Description }}
+            </div>
+          </a-form-item>
+          <a-form-item label="project-link">
+            <a-typography-link type="link" style="white-space: normal" @click="openTab(caseInfo.data.Source)">
+              {{ caseInfo.data.Source }}</a-typography-link>
+          </a-form-item>
+        </a-form>
       </div>
     </a-modal>
   </div>
@@ -57,5 +75,9 @@ onMounted(async () => {
   height: auto;
   max-height: 400px;
   object-fit: contain;
+}
+
+.map-project-intro{
+  text-align: justify;
 }
 </style>

@@ -56,15 +56,15 @@ const stormMarker = L.icon({
 
 const customizeMarker = (type: string): Icon => {
     switch (type) {
-        case 'shoreline':
+        case 'coastal':
             return shoreMarker
-        case 'urban':
+        case 'riverine':
             return urbanMarker
         case 'stormwater':
             return stormMarker
-        case 'wildlife':
+        case 'uplandSlope':
             return wildMarker
-        case 'roadway':
+        case 'corridor':
             return roadMarker
         default:
             return defaultMarker
@@ -72,11 +72,11 @@ const customizeMarker = (type: string): Icon => {
 }
 
 const legendData = [
-    { icon: shoreIcon, label: 'shoreline' },
-    { icon: urbanIcon, label: 'urban' },
+    { icon: shoreIcon, label: 'coastal' },
+    { icon: urbanIcon, label: 'riverine' },
     { icon: stormIcon, label: 'stormwater' },
-    { icon: wildIcon, label: 'wildlife' },
-    { icon: roadIcon, label: 'roadway' }
+    { icon: wildIcon, label: 'uplandSlope' },
+    { icon: roadIcon, label: 'corridor' }
 ]
 
 /**
